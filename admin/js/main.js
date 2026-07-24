@@ -3,6 +3,12 @@
  * @param {string} tabName - 'dashboard' | 'calendar' | 'settings'
  */
 function switchTab(tabName) {
+    // [100% 정답수정] 대시보드 클릭 시에는 자바스크립트 전환 대신 실제 index.html 페이지로 이동시킵니다.
+    if (tabName === 'dashboard') {
+        location.href = 'index.html';
+        return;
+    }
+
     // 1. 제어할 메인 페이지 본문 배열
     const pages = {
         dashboard: document.getElementById('page-dashboard'),
@@ -10,7 +16,7 @@ function switchTab(tabName) {
         settings: document.getElementById('page-settings')
     };
 
-    // 2. 왼쪽 사이드바 메뉴 버튼 배열
+    // 2. 왼쪽 사이드바 메뉴 버튼 배열 (a 태그와 button 태그 모두 정상 호출)
     const buttons = {
         dashboard: document.getElementById('btn-dashboard'),
         calendar: document.getElementById('btn-calendar'),
@@ -45,5 +51,7 @@ function switchTab(tabName) {
 function logout() {
     if (confirm('로그아웃 하시겠습니까?')) {
         alert('성공적으로 로그아웃되었습니다.');
+        // [100% 정답수정] 알림창 확인 후 로그인 화면인 login.html로 페이지를 이동시킵니다.
+        location.href = 'login.html';
     }
 }
