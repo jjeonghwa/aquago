@@ -1,0 +1,39 @@
+/* admin/css/admin.css */
+
+/* 기본 스크롤바 정돈 및 모바일 뷰 최적화 */
+body {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* 입력창 포커스 공통 스타일 확장 */
+.admin-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+.admin-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    background-color: #ffffff;
+}
+
+/* 기본 버튼 공통 스타일 확장 */
+.admin-btn-primary {
+    width: 100%;
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 0.875rem 0;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+    transition: all 0.2s;
+}
+.admin-btn-primary:active {
+    background-color: #1d4ed8;
+    transform: scale(0.99);
+}
