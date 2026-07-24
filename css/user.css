@@ -1,0 +1,12 @@
+/* css/user.css */
+
+/* 앱처럼 자연스러운 트랙 패드 클릭 감각 적용 */
+button, input[type="radio"] {
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+/* 라디오 버튼 다홍색 포인트 컬러 스타일링 */
+input[type="radio"]:checked {
+    accent-color: #FF6B6B;
+}
