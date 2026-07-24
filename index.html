@@ -4,100 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아쿠아go! - 요트예약</title>
-    <!-- Tailwind CSS 기본 탑재 -->
-    <script src="https://tailwindcss.com"></script>
-    <!-- 외부 파일 연동 -->
+    <!-- 🎨 외부로 완벽히 분리한 스타일시트 링크 -->
     <link rel="stylesheet" href="css/user.css">
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans min-h-screen p-4 flex flex-col justify-start items-center">
+<body>
 
-    <!-- 모바일 화면 가이드 컨테이너 -->
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-md overflow-hidden">
+    <!-- 앱 전체 고정 틀 -->
+    <div class="app-container">
         
-        <!-- 상단 타이틀 영역 -->
-        <header class="bg-blue-900 text-white p-5 text-center">
-            <h1 class="text-xl font-bold tracking-tight">아쿠아고 (aquago)</h1>
-            <p class="text-xs text-blue-200 mt-1">동해안 요트스테이 & 바다속구경</p>
+        <!-- 상단 고정 네이비 바 -->
+        <header class="app-header">
+            <h1>아쿠아고 (aquago)</h1>
+            <p>동해안 요트스테이 & 바다속구경</p>
         </header>
 
-        <!-- ========================================== -->
-        <!-- [화면 1] 상품 및 시간 선택 -->
-        <!-- ========================================== -->
-        <div id="user-page-1" class="p-4 space-y-4">
-            <h2 class="text-sm font-bold text-gray-500">원하시는 투어 코스를 선택하세요</h2>
+        <!-- 본문 콘텐츠 영역 -->
+        <div class="app-content">
             
-            <!-- 코스 버튼 1 -->
-            <button onclick="selectProduct('바다 속 구경 코스 (오전 10:00)')" 
-                class="w-full text-left p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-blue-900 transition-all">
-                <p class="font-bold text-base text-gray-800">🤿 스노클링 & 바다 속 구경</p>
-                <p class="text-xs text-gray-500 mt-1">오전 10:00 출항 (장비 대여 포함)</p>
-            </button>
+            <!-- [화면 1] 투어 코스 선택 -->
+            <div id="user-page-1">
+                <h2 class="page-title">원하시는 투어 코스를 선택하세요</h2>
+                
+                <button onclick="selectProduct('바다 속 구경 코스 (오전 10:00)')" class="card-button">
+                    <p class="card-title">🤿 스노클링 & 바다 속 구경</p>
+                    <p class="card-desc">오전 10:00 출항 (장비 대여 일체 포함)</p>
+                </button>
 
-            <!-- 코스 버튼 2 -->
-            <button onclick="selectProduct('할머니집 독채 패키지 (오후 14:00)')" 
-                class="w-full text-left p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-blue-900 transition-all">
-                <p class="font-bold text-base text-gray-800">🏡 요트 투어 + 할머니집 독채</p>
-                <p class="text-xs text-gray-500 mt-1">오후 14:00 출항 (시골 민박 1박 연계)</p>
-            </button>
-        </div>
-
-        <!-- ========================================== -->
-        <!-- [화면 2] 인원 선택 및 최종 예약 버튼 -->
-        <!-- ========================================== -->
-        <div id="user-page-2" class="hidden p-4 space-y-5">
-            <div class="bg-blue-50 p-4 rounded-xl text-center">
-                <p class="text-xs text-gray-500">선택한 스케줄</p>
-                <p id="selected-product-display" class="font-bold text-blue-900 mt-1">-</p>
+                <button onclick="selectProduct('할머니집 독채 패키지 (오후 14:00)')" class="card-button">
+                    <p class="card-title">🏡 요트 투어 + 할머니집 독채</p>
+                    <p class="card-desc">오후 14:00 출항 (프라이빗 시골 민박 1박 연계)</p>
+                </button>
             </div>
 
-            <!-- 인원 설정 -->
-            <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl">
-                <span class="font-bold text-sm">탑승 인원</span>
-                <div class="flex items-center gap-3">
-                    <button onclick="changeCount(-1)" class="w-8 h-8 bg-white border border-gray-200 rounded-lg font-bold text-gray-600">-</button>
-                    <span id="people-count" class="font-bold text-base w-4 text-center">1</span>
-                    <button onclick="changeCount(1)" class="w-8 h-8 bg-white border border-gray-200 rounded-lg font-bold text-gray-600">+</button>
+            <!-- [화면 2] 탑승 인원 설정 -->
+            <div id="user-page-2" class="hidden">
+                <div class="info-box">
+                    <p>선택하신 예약 스케줄</p>
+                    <p id="selected-product-display">-</p>
+                </div>
+
+                <div class="counter-row">
+                    <span class="counter-label">탑승 총 인원</span>
+                    <div class="counter-group">
+                        <button onclick="changeCount(-1)" class="btn-circle">-</button>
+                        <span id="people-count" class="count-num">1</span>
+                        <button onclick="changeCount(1)" class="btn-circle">+</button>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button onclick="goBack(1)" class="btn-back">뒤로가기</button>
+                    <button onclick="submitReservation()" class="btn-submit">탑승권 발권하기</button>
                 </div>
             </div>
 
-            <!-- 하단 조작 버튼들 -->
-            <div class="grid grid-cols-3 gap-2">
-                <button onclick="goBack(1)" class="bg-gray-100 text-gray-600 py-3.5 rounded-xl text-sm font-bold">뒤로가기</button>
-                <button onclick="submitReservation()" class="col-span-2 bg-blue-900 text-white py-3.5 rounded-xl text-sm font-bold text-center">탑승권 발권하기</button>
-            </div>
-        </div>
+            <!-- [화면 3] 발권 완료 모바일 티켓 -->
+            <div id="user-page-3" class="hidden text-center">
+                <div class="status-message">
+                    <p class="status-success">✓ 예약 신청 접수 완료</p>
+                    <p class="status-desc">사촌동생이 배편 확인 후 확인 문자를 보내드립니다.</p>
+                </div>
 
-        <!-- ========================================== -->
-        <!-- [화면 3] 발권 완료 티켓 영수증 -->
-        <!-- ========================================== -->
-        <div id="user-page-3" class="hidden p-4 space-y-5 text-center">
-            <div class="py-4">
-                <p class="text-emerald-600 font-bold text-base">✓ 예약 신청 접수 완료</p>
-                <p class="text-xs text-gray-400 mt-1">사촌동생이 확인 후 문자를 보내드립니다.</p>
-            </div>
+                <div class="ticket-box">
+                    <div class="ticket-row">
+                        <span class="ticket-label">선택 코스</span>
+                        <span id="ticket-product" class="ticket-value">-</span>
+                    </div>
+                    <div class="ticket-row">
+                        <span class="ticket-label">탑승 인원</span>
+                        <span id="ticket-people" class="ticket-value">1명</span>
+                    </div>
+                    <div class="ticket-row ticket-dashed-top">
+                        <span class="ticket-label">예약 인증코드</span>
+                        <span class="ticket-code">AQG7794X</span>
+                    </div>
+                </div>
 
-            <!-- 담백한 티켓 영수증 정보 -->
-            <div class="border-t border-b border-gray-200 py-4 space-y-2 text-sm text-left px-2">
-                <p class="flex justify-between">
-                    <span class="text-gray-400">예약 코스</span>
-                    <span id="ticket-product" class="font-bold text-gray-800">-</span>
-                </p>
-                <p class="flex justify-between">
-                    <span class="text-gray-400">총 인원</span>
-                    <span id="ticket-people" class="font-bold text-gray-800">1명</span>
-                </p>
-                <p class="flex justify-between pt-2 border-t border-dashed border-gray-100">
-                    <span class="text-gray-400">예약 인증번호</span>
-                    <span class="font-mono text-blue-900 font-bold">AQG7794X</span>
-                </p>
+                <button onclick="goBack(1)" class="btn-full">메인 홈으로 돌아가기</button>
             </div>
-
-            <button onclick="goBack(1)" class="w-full bg-gray-800 text-white py-3 rounded-xl text-sm font-bold">메인 홈으로 돌아가기</button>
         </div>
 
     </div>
 
-    <!-- ⚙️ 로직 자바스크립트 연결 -->
+    <!-- ⚙️ 외부로 분리한 제어 스크립트 링크 -->
     <script src="js/user.js"></script>
 </body>
 </html>
