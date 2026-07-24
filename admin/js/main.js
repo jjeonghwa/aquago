@@ -1,37 +1,47 @@
 /**
- * 왼쪽 사이드바 메뉴 전환 함수
+ * 왼쪽 사이드바 메뉴 탭 전환 함수
  * @param {string} tabName - 'dashboard' | 'calendar' | 'settings'
  */
 function switchTab(tabName) {
+    // 1. 제어할 메인 페이지 본문 배열
     const pages = {
         dashboard: document.getElementById('page-dashboard'),
         calendar: document.getElementById('page-calendar'),
         settings: document.getElementById('page-settings')
     };
 
+    // 2. 왼쪽 사이드바 메뉴 버튼 배열
     const buttons = {
         dashboard: document.getElementById('btn-dashboard'),
         calendar: document.getElementById('btn-calendar'),
         settings: document.getElementById('btn-settings')
     };
 
-    // 전체 숨김 및 스타일 초기화 (기본 상태로)
+    // 3. 전체 초기화 (페이지 숨김 및 버튼 무채색 변경)
     Object.keys(pages).forEach(key => {
-        if (pages[key]) pages[key].classList.add('hidden');
+        if (pages[key]) {
+            pages[key].classList.add('hidden');
+        }
         if (buttons[key]) {
+            // 활성화 배경 클래스 제거 후 기본 텍스트 색상 부여
             buttons[key].classList.remove('bg-blue-700', 'text-white', 'font-bold');
-            buttons[key].classList.add('text-blue-100', 'hover:bg-blue-700', 'hover:text-white');
+            buttons[key].classList.add('text-blue-100');
         }
     });
 
-    // 선택한 메뉴 활성화 스타일 적용
-    if (pages[tabName]) pages[tabName].classList.remove('hidden');
+    // 4. 선택된 탭 활성화 (본문 노출 및 버튼 파란색 배경 부여)
+    if (pages[tabName]) {
+        pages[tabName].classList.remove('hidden');
+    }
     if (buttons[tabName]) {
-        buttons[tabName].classList.remove('text-blue-100', 'hover:bg-blue-700');
+        buttons[tabName].classList.remove('text-blue-100');
         buttons[tabName].classList.add('bg-blue-700', 'text-white', 'font-bold');
     }
 }
 
+/**
+ * 관리자 로그아웃 함수
+ */
 function logout() {
     if (confirm('로그아웃 하시겠습니까?')) {
         alert('성공적으로 로그아웃되었습니다.');
