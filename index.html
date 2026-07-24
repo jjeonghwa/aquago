@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아쿠아go! - 요트예약</title>
-    <!-- 🎨 외부 스타일시트 링크 -->
+    <!-- 🎨 외부로 완벽히 분리한 스타일시트 링크 -->
     <link rel="stylesheet" href="css/user.css">
 </head>
 <body>
@@ -34,9 +34,15 @@
                     <p class="card-title">🏡 요트 투어 + 영덕집 독채</p>
                     <p class="card-desc">오후 14:00 출항 (프라이빗 시골 민박 1박 연계)</p>
                 </button>
+
+                <!-- ⚓ 새로 추가된 속초 특별행 코스 버튼입니다 -->
+                <button onclick="selectProduct('속초 특별행 패키지 (오후 16:00)')" class="card-button">
+                    <p class="card-title">⚓ 요트 투어 + 속초 특별행</p>
+                    <p class="card-desc">오후 16:00 출항 (속초 바다 원정 및 스페셜 코스)</p>
+                </button>
             </div>
 
-            <!-- [화면 1-2] 날짜 선택 (새로 추가된 단계) -->
+            <!-- [화면 1-2] 날짜 선택 -->
             <div id="user-page-date" class="hidden space-y-4">
                 <h2 class="page-title">예약하실 날짜를 선택하세요</h2>
                 
@@ -45,7 +51,7 @@
                     <p id="date-page-product-display">-</p>
                 </div>
 
-                <!-- 모바일 네이티브 달력 인풋 (가장 깔끔하고 안 깨짐) -->
+                <!-- 모바일 네이티브 달력 인풋 -->
                 <div style="background-color: #f9fafb; padding: 16px; border-radius: 12px; border: 1px solid #e5e7eb;">
                     <label for="booking-date" style="font-size: 13px; font-weight: 700; color: #4b5563; display: block; margin-bottom: 8px;">탑승 일자 선택</label>
                     <input type="date" id="booking-date" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; font-weight: bold; color: #1e3a8a; outline: none;">
@@ -61,7 +67,6 @@
             <div id="user-page-2" class="hidden">
                 <div class="info-box">
                     <p>선택하신 예약 스케줄</p>
-                    <!-- 날짜와 상품이 같이 보이도록 수정 -->
                     <p id="selected-product-display">-</p>
                 </div>
 
@@ -75,7 +80,6 @@
                 </div>
 
                 <div class="btn-group">
-                    <!-- 뒤로가기 시 날짜 선택창으로 가도록 수정 -->
                     <button onclick="goToDatePage()" class="btn-back">뒤로가기</button>
                     <button onclick="submitReservation()" class="btn-submit">탑승권 발권하기</button>
                 </div>
@@ -89,7 +93,6 @@
                 </div>
 
                 <div class="ticket-box">
-                    <!-- 날짜가 영수증에 표기되도록 열 추가 -->
                     <div class="ticket-row">
                         <span class="ticket-label">예약 날짜</span>
                         <span id="ticket-date" class="ticket-value">-</span>
