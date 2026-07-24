@@ -1,32 +1,39 @@
-// admin/js/main.js
+/**
+ * 왼쪽 사이드바 메뉴 전환 함수
+ * @param {string} tabName - 'dashboard' | 'calendar' | 'settings'
+ */
+function switchTab(tabName) {
+    const pages = {
+        dashboard: document.getElementById('page-dashboard'),
+        calendar: document.getElementById('page-calendar'),
+        settings: document.getElementById('page-settings')
+    };
 
-// 하단 고정 탭 바를 눌러 내부 본문 화면을 교체하는 함수
-function switchTab(tabId) {
-    // 1. 모든 메인 콘텐츠 섹션 숨기기
-    document.getElementById('page-dashboard').classList.add('hidden');
-    document.getElementById('page-calendar').classList.add('hidden');
-    document.getElementById('page-settings').classList.add('hidden');
+    const buttons = {
+        dashboard: document.getElementById('btn-dashboard'),
+        calendar: document.getElementById('btn-calendar'),
+        settings: document.getElementById('btn-settings')
+    };
 
-    // 2. 누른 탭에 해당하는 섹션만 활성화
-    document.getElementById('page-' + tabId).classList.remove('hidden');
-
-    // 3. 하단 탭 버튼들 아이콘 색상 초기화 및 하이라이트 반영
-    const tabs = ['dashboard', 'calendar', 'settings'];
-    tabs.forEach(t => {
-        const btn = document.getElementById('btn-' + t);
-        if (t === tabId) {
-            btn.classList.add('text-blue-600');
-            btn.classList.remove('text-gray-400');
-        } else {
-            btn.classList.remove('text-blue-600');
-            btn.classList.add('text-gray-400');
+    // 전체 숨김 및 스타일 초기화 (기본 상태로)
+    Object.keys(pages).forEach(key => {
+        if (pages[key]) pages[key].classList.add('hidden');
+        if (buttons[key]) {
+            buttons[key].classList.remove('bg-blue-700', 'text-white', 'font-bold');
+            buttons[key].classList.add('text-blue-100', 'hover:bg-blue-700', 'hover:text-white');
         }
     });
+
+    // 선택한 메뉴 활성화 스타일 적용
+    if (pages[tabName]) pages[tabName].classList.remove('hidden');
+    if (buttons[tabName]) {
+        buttons[tabName].classList.remove('text-blue-100', 'hover:bg-blue-700');
+        buttons[tabName].classList.add('bg-blue-700', 'text-white', 'font-bold');
+    }
 }
 
-// 대시보드 상단 로그아웃 버튼용 함수
 function logout() {
     if (confirm('로그아웃 하시겠습니까?')) {
-        location.href = 'login.html';
+        alert('성공적으로 로그아웃되었습니다.');
     }
 }
