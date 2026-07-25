@@ -1,89 +1,158 @@
-/* css/user.css */
-
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+/* 기본 초기화 및 폰트 세팅 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Malgun Gothic', dotum, sans-serif;
+    background-color: #F8FAFC;
+    display: flex; /* 왼쪽, 오른쪽 수평 배치 구조 선언 */
+    min-height: 100vh;
 }
 
-body { 
-    background-color: #f3f4f6; 
-    color: #1f2937; 
-    display: flex; 
-    justify-content: center; 
-    padding: 16px; 
+/* ==========================================
+   1. 왼쪽 사이드바 프레임 고정 (화면 겹침 완전 해결)
+   ========================================== */
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    background-color: #1E50A2; /* 기존 화면의 선명한 파란색 */
+    height: 100vh;
+    position: fixed; /* 스크롤해도 왼쪽 메뉴는 고정 */
+    top: 0;
+    left: 0;
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
 }
 
-/* 모바일 전체 컨테이너 패널 */
-.app-container { 
-    width: 100%; 
-    max-width: 400px; 
-    border-radius: 24px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
-    overflow: hidden; 
-    background: white; 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
 
-/* 헤더 블루 바 */
-.app-header { 
-    background-color: #1e3a8a; 
-    color: #ffffff; 
-    padding: 24px 20px; 
-    text-align: center; 
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex- Strain: 1;
+    flex-grow: 1;
 }
-.app-header h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
-.app-header p { font-size: 12px; color: #93c5fd; margin-top: 4px; }
 
-/* 본문 패딩 조정 */
-.app-content { padding: 20px; }
-.page-title { font-size: 14px; font-weight: 700; color: #6b7280; margin-bottom: 16px; }
-
-/* 상품 카드 선택 버튼 */
-.card-button { 
-    width: 100%; 
-    text-align: left; 
-    padding: 18px; 
-    background-color: #f9fafb; 
-    border: 1px solid #e5e7eb; 
-    border-radius: 16px; 
-    margin-bottom: 12px; 
-    cursor: pointer; 
-    transition: all 0.2s; 
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s;
 }
-.card-button:hover { border-color: #1e3a8a; background-color: #f0f4ff; }
-.card-title { font-size: 15px; font-weight: 700; color: #111827; }
-.card-desc { font-size: 12px; color: #6b7280; margin-top: 4px; }
 
-/* 요약 배너 형태 */
-.info-box { background-color: #eff6ff; padding: 16px; border-radius: 12px; text-align: center; margin-bottom: 16px; }
-.info-box p:first-child { font-size: 11px; color: #1e40af; font-weight: 700; }
-.info-box p:last-child { font-size: 15px; font-weight: 800; color: #1e3a8a; margin-top: 2px; }
+.menu-item:hover, .menu-item.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-weight: bold;
+}
 
-/* 인원 설정 레이아웃 */
-.counter-row { display: flex; justify-content: space-between; align-items: center; background-color: #f9fafb; padding: 14px 16px; border-radius: 12px; margin-bottom: 24px; }
-.counter-label { font-size: 14px; font-weight: 700; }
-.counter-group { display: flex; align-items: center; gap: 12px; }
-.btn-circle { width: 32px; height: 32px; background: white; border: 1px solid #d1d5db; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.count-num { font-size: 16px; font-weight: 700; width: 16px; text-align: center; }
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 14px;
+}
 
-/* 하단 버튼 제어 규격 */
-.btn-group { display: flex; gap: 8px; }
-.btn-back { background-color: #f3f4f6; color: #4b5563; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; width: 35%; text-align: center; }
-.btn-submit { background-color: #1e3a8a; color: white; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; width: 65%; text-align: center; }
-.btn-full { background-color: #111827; color: white; padding: 14px; border-radius: 12px; font-size: 14px; font-weight: 700; border: none; cursor: pointer; width: 100%; text-align: center; }
+.material-icons {
+    font-size: 22px;
+}
 
-/* 스마트 영수증 내부 스타일 */
-.status-message { margin: 12px 0 24px 0; }
-.status-success { color: #059669; font-weight: bold; font-size: 16px; }
-.status-desc { color: #6b7280; font-size: 12px; margin-top: 4px; }
-.text-center { text-align: center; }
+/* ==========================================
+   2. 오른쪽 메인 콘텐츠 프레임 독립 독립화
+   ========================================== */
+.main-content {
+    margin-left: 250px; /* 사이드바 너비만큼 본문을 완벽하게 밀어냄 */
+    flex: 1;
+    padding: 40px;
+    box-sizing: border-box;
+    min-height: 100vh;
+}
 
-.ticket-box { border-top: 1px dashed #d1d5db; border-bottom: 1px dashed #d1d5db; padding: 16px 4px; margin-bottom: 24px; }
-.ticket-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 10px; }
-.ticket-label { color: #9ca3af; }
-.ticket-value { font-weight: 700; color: #1f2937; }
-.ticket-dashed-top { margin-top: 14px; padding-top: 10px; border-top: 1px dotted #e5e7eb; }
-.ticket-code { font-family: monospace; color: #1e3a8a; font-weight: bold; }
+/* 탭 내부 스타일링 공통 */
+.content-section {
+    width: 100%;
+    max-width: 1000px;
+}
 
-.hidden { display: none !important; }
+/* [대시보드] 오늘 현황 요약 카드 */
+.summary-container {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    margin-bottom: 30px;
+}
+.summary-title { margin: 0 0 16px 0; color: #64748B; font-weight: normal; font-size: 14px; }
+.summary-grid { display: flex; gap: 16px; }
+.summary-card {
+    flex: 1;
+    background: #F1F5F9;
+    padding: 16px;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.card-label { font-size: 13px; color: #64748B; }
+.card-count { font-size: 22px; font-weight: bold; }
+.count-blue { color: #2563EB; }
+.count-green { color: #16A34A; }
+.count-purple { color: #7C3AED; }
+
+/* [대시보드] 신규 예약 신청 리스트 */
+.reservation-container { margin-top: 10px; }
+.section-title { font-size: 16px; color: #1E293B; display: flex; align-items: center; gap: 6px; margin-bottom: 16px; }
+.orange-text { color: #EA580C; font-size: 18px; }
+.reservation-card {
+    background: #ffffff;
+    border-left: 4px solid #EA580C;
+    padding: 24px;
+    border-radius: 0 16px 16px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.badge-orange { background: #FFEDD5; color: #EA580C; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold; }
+.price-text { font-size: 18px; font-weight: bold; color: #1E293B; }
+.customer-name { margin: 0 0 8px 0; font-size: 20px; color: #1E293B; }
+.reservation-details { color: #475569; margin: 0 0 20px 0; font-size: 14px; }
+.button-group { display: flex; gap: 12px; justify-content: flex-end; }
+.btn { padding: 12px 30px; border: none; border-radius: 8px; font-size: 14px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+.btn-reject { background: #F1F5F9; color: #475569; }
+.btn-reject:hover { background: #E2E8F0; }
+.btn-confirm { background: #2563EB; color: #ffffff; }
+.btn-confirm:hover { background: #1D4ED8; }
+
+/* [매출통계] 타이틀 및 차트 박스 */
+.page-header h2 { margin: 0 0 4px 0; font-size: 24px; color: #1E293B; }
+.subtitle { margin: 0; color: #94A3B8; font-size: 14px; }
+.chart-card-wrapper {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+    margin-top: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+.chart-card-wrapper h3 { margin: 0 0 20px 0; font-size: 16px; color: #334155; }
+.chart-container { position: relative; height: 350px; width: 100%; }

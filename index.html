@@ -3,121 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>아쿠아go! - 요트예약</title>
-    <!-- 🎨 외부로 완벽히 분리한 스타일시트 링크 -->
-    <link rel="stylesheet" href="css/user.css">
+    <title>아쿠아고 관리자 대시보드</title>
+    <!-- 구글 머티리얼 아이콘 & 차트 라이브러리 로드 -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <script src="https://jsdelivr.net"></script>
+    <!-- CSS 연결 -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
-    <!-- 앱 전체 고정 틀 -->
-    <div class="app-container">
+    <!-- 1. 왼쪽 고정 프레임 (사이드바 메뉴) -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="material-icons">directions_boat</span>
+            <span>아쿠아고 관리자</span>
+        </div>
+        <nav class="menu">
+            <a href="#" class="menu-item active" id="btn-dashboard">
+                <span class="material-icons">home</span> 대시보드
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">calendar_today</span> 예약일정
+            </a>
+            <!-- 새로 추가된 매출 통계 메뉴 -->
+            <a href="#" class="menu-item" id="btn-sales">
+                <span class="material-icons">bar_chart</span> 매출통계
+            </a>
+            <a href="#" class="menu-item">
+                <span class="material-icons">manage_accounts</span> 운영관리
+            </a>
+        </nav>
+        <a href="#" class="logout-btn">
+            <span class="material-icons">logout</span> 로그아웃
+        </a>
+    </aside>
+
+    <!-- 2. 오른쪽 독립 프레임 (메인 콘텐츠 영역) -->
+    <main class="main-content">
         
-        <!-- 상단 고정 네이비 바 -->
-        <header class="app-header">
-            <h1>아쿠아고 (aquago)</h1>
-            <p>동해안 요트스테이 & 바다속구경</p>
-        </header>
+        <!-- [탭 1] 대시보드 메인 화면 -->
+        <div id="section-dashboard" class="content-section">
+            <!-- 상단 요약 카드 -->
+            <section class="summary-container">
+                <h4 class="summary-title">오늘의 운항 및 숙박 현황</h4>
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <span class="card-label">대기중</span>
+                        <span class="card-count count-blue">2건</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="card-label">요트 운항</span>
+                        <span class="card-count count-green">1건</span>
+                    </div>
+                    <div class="summary-card">
+                        <span class="card-label">숙소 입실</span>
+                        <span class="card-count count-purple">3건</span>
+                    </div>
+                </div>
+            </section>
 
-        <!-- 본문 콘텐츠 영역 -->
-        <div class="app-content">
-            
-            <!-- [화면 1] 투어 코스 선택 -->
-            <div id="user-page-1">
-                <h2 class="page-title">원하시는 투어 코스를 선택하세요</h2>
-                
-                <button onclick="selectProduct('바다 속 구경 코스 (오전 10:00)')" class="card-button">
-                    <p class="card-title">🤿 스노클링 & 바다 속 구경</p>
-                    <p class="card-desc">오전 10:00 출항 (장비 대여 일체 포함)</p>
-                </button>
+            <!-- 신규 예약 신청 리스트 -->
+            <section class="reservation-container">
+                <h4 class="section-title"><span class="orange-text">fiber_new</span> 신규 예약 신청</h4>
+                <div class="reservation-card">
+                    <div class="card-header">
+                        <span class="badge-orange">요트 + 할머니집</span>
+                        <span class="price-text">350,000원</span>
+                    </div>
+                    <h3 class="customer-name">김바다 (4명)</h3>
+                    <p class="reservation-details">
+                        ⚠️ 14:00 요트 운항 / 🏡 할머니집 독채 민박
+                    </p>
+                    <div class="button-group">
+                        <button class="btn btn-reject">거절하기</button>
+                        <button class="btn btn-confirm">예약 확정</button>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-                <button onclick="selectProduct('영덕집 독채 패키지 (오후 14:00)')" class="card-button">
-                    <p class="card-title">🏡 요트 투어 + 영덕집 독채</p>
-                    <p class="card-desc">오후 14:00 출항 (프라이빗 시골 민박 1박 연계)</p>
-                </button>
-
-                <!-- ⚓ 새로 추가된 속초 특별행 코스 버튼입니다 -->
-                <button onclick="selectProduct('속초 특별행 패키지 (오후 16:00)')" class="card-button">
-                    <p class="card-title">⚓ 요트 투어 + 속초 특별행</p>
-                    <p class="card-desc">오후 16:00 출항 (속초 바다 원정 및 스페셜 코스)</p>
-                </button>
+        <!-- [탭 2] 매출 통계 화면 (기본 상태는 숨김) -->
+        <div id="section-sales" class="content-section" style="display: none;">
+            <div class="page-header">
+                <h2>매출 통계 분석</h2>
+                <p class="subtitle">월별 전체 매출 추이를 차트로 확인하세요.</p>
             </div>
-
-            <!-- [화면 1-2] 날짜 선택 -->
-            <div id="user-page-date" class="hidden space-y-4">
-                <h2 class="page-title">예약하실 날짜를 선택하세요</h2>
-                
-                <div class="info-box">
-                    <p>선택하신 코스</p>
-                    <p id="date-page-product-display">-</p>
+            <!-- 실제 차트가 그려질 캔버스 카드 -->
+            <div class="chart-card-wrapper">
+                <h3>월별 매출 추이 (상반기)</h3>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
                 </div>
-
-                <!-- 모바일 네이티브 달력 인풋 -->
-                <div style="background-color: #f9fafb; padding: 16px; border-radius: 12px; border: 1px solid #e5e7eb;">
-                    <label for="booking-date" style="font-size: 13px; font-weight: 700; color: #4b5563; display: block; margin-bottom: 8px;">탑승 일자 선택</label>
-                    <input type="date" id="booking-date" style="width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px; font-weight: bold; color: #1e3a8a; outline: none;">
-                </div>
-
-                <div class="btn-group" style="margin-top: 24px;">
-                    <button onclick="goBack(1)" class="btn-back">뒤로가기</button>
-                    <button onclick="selectDateNext()" class="btn-submit">다음 단계로</button>
-                </div>
-            </div>
-
-            <!-- [화면 2] 탑승 인원 설정 -->
-            <div id="user-page-2" class="hidden">
-                <div class="info-box">
-                    <p>선택하신 예약 스케줄</p>
-                    <p id="selected-product-display">-</p>
-                </div>
-
-                <div class="counter-row">
-                    <span class="counter-label">탑승 총 인원</span>
-                    <div class="counter-group">
-                        <button onclick="changeCount(-1)" class="btn-circle">-</button>
-                        <span id="people-count" class="count-num">1</span>
-                        <button onclick="changeCount(1)" class="btn-circle">+</button>
-                    </div>
-                </div>
-
-                <div class="btn-group">
-                    <button onclick="goToDatePage()" class="btn-back">뒤로가기</button>
-                    <button onclick="submitReservation()" class="btn-submit">탑승권 발권하기</button>
-                </div>
-            </div>
-
-            <!-- [화면 3] 발권 완료 모바일 티켓 -->
-            <div id="user-page-3" class="hidden text-center">
-                <div class="status-message">
-                    <p class="status-success">✓ 예약 신청 접수 완료</p>
-                    <p class="status-desc">담당자가 배편 확인 후 확인 문자를 보내드립니다.</p>
-                </div>
-
-                <div class="ticket-box">
-                    <div class="ticket-row">
-                        <span class="ticket-label">예약 날짜</span>
-                        <span id="ticket-date" class="ticket-value">-</span>
-                    </div>
-                    <div class="ticket-row">
-                        <span class="ticket-label">선택 코스</span>
-                        <span id="ticket-product" class="ticket-value">-</span>
-                    </div>
-                    <div class="ticket-row">
-                        <span class="ticket-label">탑승 인원</span>
-                        <span id="ticket-people" class="ticket-value">1명</span>
-                    </div>
-                    <div class="ticket-row ticket-dashed-top">
-                        <span class="ticket-label">예약 인증코드</span>
-                        <span class="ticket-code">AQG7794X</span>
-                    </div>
-                </div>
-
-                <button onclick="goBack(1)" class="btn-full">메인 홈으로 돌아가기</button>
             </div>
         </div>
 
-    </div>
+    </main>
 
-    <!-- ⚙️ 외부로 분리한 제어 스크립트 링크 -->
-    <script src="js/user.js"></script>
+    <!-- 자바스크립트 연결 -->
+    <script src="./js/main.js"></script>
 </body>
 </html>
